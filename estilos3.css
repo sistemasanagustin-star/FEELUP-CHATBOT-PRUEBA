@@ -1,0 +1,123 @@
+/* ============ COLORES (puedes cambiarlos aquí) ============ */
+:root{
+  --morado:#7b2cbf;
+  --morado-claro:#a855f7;
+  --lila:#f3e8ff;
+  --rosa:#ffe4f1;
+  --menta:#e6f8ee;
+  --amarillo:#fff4d6;
+  --fondo:#f7f5ff;
+  --texto:#1f2a44;
+  --gris:#8a8fa3;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#e9e4fa;color:var(--texto)}
+button{font-family:inherit}
+
+/* Marco tipo celular */
+.app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--fondo);padding:16px 16px 110px}
+
+/* Vistas (pantallas internas) */
+.vista{display:none}
+.vista.activa{display:block;animation:entra .3s ease}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.volver{background:none;border:none;color:var(--morado);font-weight:600;font-size:15px;
+        text-decoration:underline;cursor:pointer;margin-bottom:12px;display:inline-block}
+
+/* ============ PANTALLA PRINCIPAL ============ */
+.hero{background:linear-gradient(135deg,#fff,#f1e4ff);border-radius:28px;padding:22px;
+      box-shadow:0 8px 24px rgba(123,44,191,.12);margin-bottom:16px}
+.hero h1{font-size:28px}
+.hero p{color:var(--gris);margin-top:4px}
+.chip{display:inline-block;margin-top:14px;background:var(--lila);color:var(--morado);
+      font-weight:600;font-size:13px;padding:6px 14px;border-radius:999px}
+
+.destacado{background:linear-gradient(135deg,var(--morado),#c77dff);color:#fff;border-radius:24px;
+           padding:20px;margin-bottom:20px;box-shadow:0 10px 24px rgba(123,44,191,.3)}
+.destacado small{opacity:.9;font-size:13px}
+.destacado h2{font-size:21px;margin:4px 0 6px}
+.destacado p{font-size:14px;opacity:.95}
+.destacado button{margin-top:14px;background:#fff;color:var(--morado);border:none;border-radius:999px;
+                  padding:11px 22px;font-weight:700;font-size:15px;cursor:pointer}
+
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;padding-bottom:4px}
+.tab{border:none;background:#fff;color:var(--morado);padding:9px 18px;border-radius:999px;
+     font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.tab.activa{background:var(--morado);color:#fff}
+
+.tarjeta{display:flex;align-items:center;gap:14px;background:#fff;border-radius:22px;padding:14px;
+         margin-bottom:12px;box-shadow:0 4px 14px rgba(31,42,68,.06);cursor:pointer;width:100%;
+         border:none;text-align:left;font-size:16px;transition:transform .15s}
+.tarjeta:active{transform:scale(.98)}
+.icono{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;flex-shrink:0}
+.icono svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ic-lila{background:var(--lila);color:var(--morado)}
+.ic-rosa{background:var(--rosa);color:#d6336c}
+.ic-menta{background:var(--menta);color:#1f9d55}
+.ic-amarillo{background:var(--amarillo);color:#d99a00}
+.texto{flex:1}
+.texto b{display:block;font-size:16px;color:var(--texto)}
+.texto span{font-size:13px;color:var(--gris)}
+.tiempo{font-size:12px;font-weight:600;color:var(--morado);background:var(--lila);padding:5px 10px;border-radius:999px;white-space:nowrap}
+
+/* ============ PANTALLAS DE PRÁCTICA ============ */
+.panel{background:#fff;border-radius:28px;padding:24px 20px;text-align:center;box-shadow:0 8px 24px rgba(31,42,68,.07)}
+.panel h2{font-size:22px;margin-bottom:6px}
+.panel .desc{color:var(--gris);font-size:14px;margin-bottom:10px}
+
+.btn{background:var(--morado);color:#fff;border:none;border-radius:999px;padding:14px 30px;
+     font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(123,44,191,.3);margin-top:10px}
+.btn.sec{background:var(--lila);color:var(--morado);box-shadow:none}
+
+/* Respiración */
+.zona-circulo{height:270px;display:grid;place-items:center}
+.circulo{width:150px;height:150px;border-radius:50%;
+         background:radial-gradient(circle at 35% 30%,#f0e1ff,var(--morado-claro));
+         box-shadow:0 0 50px rgba(168,85,247,.5);display:grid;place-items:center;
+         color:#fff;font-size:40px;font-weight:700;
+         transition:transform .5s ease-in-out}
+.fase{font-size:26px;font-weight:700;color:var(--morado);min-height:34px}
+.ciclo{font-size:13px;color:var(--gris);margin-top:4px}
+
+/* 5-4-3-2-1 */
+.emoji-grande{font-size:54px}
+.numero{font-size:90px;font-weight:800;color:var(--morado);line-height:1.1}
+.frase{font-size:20px;font-weight:600;margin-bottom:6px}
+
+/* Soltar pensamientos y gratitud */
+textarea,.campo{width:100%;border:2px solid var(--lila);border-radius:16px;padding:12px;font:inherit;
+                font-size:15px;background:var(--fondo);color:var(--texto);outline:none;margin-top:10px}
+textarea{min-height:110px;resize:none}
+textarea:focus,.campo:focus{border-color:var(--morado-claro)}
+.nube{min-height:64px;margin:6px 0;padding:12px;border-radius:18px;background:var(--lila);
+      color:var(--morado);font-weight:600;opacity:0}
+.nube.vuela{animation:vuela 2.4s ease-in forwards}
+@keyframes vuela{
+  0%{opacity:1;transform:translateY(0) scale(1)}
+  100%{opacity:0;transform:translateY(-170px) scale(.5) rotate(-5deg)}
+}
+.aviso{color:#d6336c;font-size:13px;min-height:18px;margin-top:6px}
+
+/* Ventana final */
+.overlay{position:fixed;inset:0;background:rgba(31,42,68,.55);display:none;place-items:center;z-index:50;padding:20px}
+.overlay.activa{display:grid}
+.modal{background:#fff;border-radius:28px;padding:28px 22px;max-width:360px;width:100%;text-align:center}
+.modal h3{font-size:22px;margin-bottom:6px}
+.modal p{color:var(--gris);margin-bottom:16px}
+.caritas{display:flex;justify-content:center;gap:12px;margin-top:10px}
+.caritas button{font-size:32px;background:var(--lila);border:none;border-radius:50%;width:56px;height:56px;cursor:pointer}
+
+/* Menú inferior */
+.menu{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;
+      display:flex;justify-content:space-around;align-items:center;padding:12px 0 16px;
+      box-shadow:0 -4px 20px rgba(0,0,0,.06);z-index:10}
+.menu a{color:var(--gris);display:grid;place-items:center}
+.menu a.activo{color:var(--morado)}
+.menu svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.menu .mas svg{width:42px;height:42px;color:var(--morado)}
+
+@media (prefers-reduced-motion:reduce){
+  .vista.activa{animation:none}
+}

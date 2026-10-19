@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FeelUp - Ejercicios</title>
+
+<link rel="stylesheet" href="estilos3.css">
+</head>
+
+<body>
+<div class="app">
+
+  <!-- ====================== PANTALLA PRINCIPAL ====================== -->
+  <section class="vista activa" id="vista-inicio">
+    <a class="volver" href="opciones.html" style="text-decoration:underline">‹ Volver</a>
+
+    <div class="hero">
+      <h1>Ejercicios 🌿</h1>
+      <p>Relájate y respira. Elige uno, tú decides cuánto tiempo.</p>
+      <span class="chip" id="contador">Hoy has hecho 0 ejercicios</span>
+    </div>
+
+    <div class="destacado">
+      <small>Para empezar</small>
+      <h2>Respiración 4-7-8</h2>
+      <p>En 3 minutos baja el ritmo y suelta la tensión.</p>
+      <button onclick="abrirRespiracion('478')">Empezar ahora</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab activa" data-cat="todos">Todos</button>
+      <button class="tab" data-cat="respirar">Respirar</button>
+      <button class="tab" data-cat="calma">Calma</button>
+    </div>
+
+    <!-- RESPIRAR -->
+    <button class="tarjeta" data-cat="respirar" onclick="abrirRespiracion('478')">
+      <span class="icono ic-lila"><svg viewBox="0 0 24 24"><path d="M3 8h10a3 3 0 1 0-3-3"/><path d="M3 12h15a3 3 0 1 1-3 3"/><path d="M3 16h7"/></svg></span>
+      <span class="texto"><b>Respiración 4-7-8</b><span>Ideal para la ansiedad</span></span>
+      <span class="tiempo">3 min</span>
+    </button>
+
+    <button class="tarjeta" data-cat="respirar" onclick="abrirRespiracion('caja')">
+      <span class="icono ic-menta"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"/></svg></span>
+      <span class="texto"><b>Respiración en caja</b><span>Cuatro tiempos iguales</span></span>
+      <span class="tiempo">2 min</span>
+    </button>
+
+    <!-- CALMA -->
+    <button class="tarjeta" data-cat="calma" onclick="abrirCalma()">
+      <span class="icono ic-rosa"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+      <span class="texto"><b>Técnica 5-4-3-2-1</b><span>Vuelve al presente con tus sentidos</span></span>
+      <span class="tiempo">3 min</span>
+    </button>
+
+    <button class="tarjeta" data-cat="calma" onclick="abrirSoltar()">
+      <span class="icono ic-lila"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.5-7.97A5.5 5.5 0 0 1 17 8.5a4.5 4.5 0 0 1 .5 9.5H7z"/></svg></span>
+      <span class="texto"><b>Soltar pensamientos</b><span>Escribe lo que pesa y déjalo ir</span></span>
+      <span class="tiempo">2 min</span>
+    </button>
+
+    <button class="tarjeta" data-cat="calma" onclick="abrirGratitud()">
+      <span class="icono ic-amarillo"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 9-9 9z"/></svg></span>
+      <span class="texto"><b>Diario de gratitud</b><span>3 cosas buenas de hoy</span></span>
+      <span class="tiempo">2 min</span>
+    </button>
+
+  </section>
+
+  <!-- ====================== RESPIRACIÓN ====================== -->
+  <section class="vista" id="vista-resp">
+    <button class="volver" onclick="salir()">‹ Volver</button>
+    <div class="panel">
+      <h2 id="respTitulo">Respiración</h2>
+      <p class="desc" id="respDesc"></p>
+      <div class="zona-circulo"><div class="circulo" id="circulo">🌬️</div></div>
+      <div class="fase" id="respFase">Siéntate cómodo</div>
+      <div class="ciclo" id="respCiclo">&nbsp;</div>
+      <button class="btn" id="btnResp" onclick="iniciarResp()">Empezar</button>
+    </div>
+  </section>
+
+  <!-- ====================== 5-4-3-2-1 ====================== -->
+  <section class="vista" id="vista-calma">
+    <button class="volver" onclick="salir()">‹ Volver</button>
+    <div class="panel">
+      <h2>Técnica 5-4-3-2-1</h2>
+      <p class="desc" id="calmaProg"></p>
+      <div class="emoji-grande" id="calmaEmoji"></div>
+      <div class="numero" id="calmaNum"></div>
+      <div class="frase" id="calmaTxt"></div>
+      <p class="desc">Búscalas con calma y nómbralas en voz baja.</p>
+      <button class="btn" id="btnCalma" onclick="siguientePaso()">Listo, siguiente</button>
+    </div>
+  </section>
+
+  <!-- ====================== SOLTAR PENSAMIENTOS ====================== -->
+  <section class="vista" id="vista-soltar">
+    <button class="volver" onclick="salir()">‹ Volver</button>
+    <div class="panel">
+      <h2>Soltar pensamientos ☁️</h2>
+      <p class="desc">Escribe lo que te preocupa. Al soltarlo, se va volando y no se guarda.</p>
+      <div class="nube" id="nube"></div>
+      <textarea id="pensamiento" placeholder="Escribe aquí lo que sientes..."></textarea>
+      <button class="btn" onclick="soltar()">Soltar</button>
+    </div>
+  </section>
+
+  <!-- ====================== GRATITUD ====================== -->
+  <section class="vista" id="vista-gratitud">
+    <button class="volver" onclick="salir()">‹ Volver</button>
+    <div class="panel">
+      <h2>Diario de gratitud 💛</h2>
+      <p class="desc">¿Qué cosas buenas pasaron hoy? Pueden ser pequeñas.</p>
+      <input class="campo" id="g1" placeholder="1. Estoy agradecido por...">
+      <input class="campo" id="g2" placeholder="2. Me hizo sonreír...">
+      <input class="campo" id="g3" placeholder="3. Algo que hice bien...">
+      <div class="aviso" id="gratMsg"></div>
+      <button class="btn" onclick="guardarGratitud()">Listo</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Ventana al terminar -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3>¡Bien hecho! 💜</h3>
+    <p id="modalMsg"></p>
+    <b>¿Cómo te sientes ahora?</b>
+    <div class="caritas">
+      <button onclick="cerrarModal()">😄</button>
+      <button onclick="cerrarModal()">🙂</button>
+      <button onclick="cerrarModal()">😐</button>
+      <button onclick="cerrarModal()">😔</button>
+    </div>
+  </div>
+</div>
+
+<!-- Menú inferior -->
+<nav class="menu">
+  <a class="activo" href="index.html"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+  <a href="#"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg></a>
+  <a class="mas" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></a>
+  <a href="#"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></a>
+  <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
+</nav>
+
+<script>
+  const $ = id => document.getElementById(id);
+  let hechos = 0;
+
+  /* ---------- Navegación entre pantallas ---------- */
+  function mostrar(id){
+    document.querySelectorAll('.vista').forEach(v => v.classList.remove('activa'));
+    $(id).classList.add('activa');
+    window.scrollTo(0,0);
+  }
+  function salir(){
+    detenerResp();
+    mostrar('vista-inicio');
+  }
+
+  /* ---------- Filtros (Todos / Respirar / Calma) ---------- */
+  document.querySelectorAll('.tab').forEach(t => {
+    t.onclick = () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('activa'));
+      t.classList.add('activa');
+      const cat = t.dataset.cat;
+      document.querySelectorAll('.tarjeta').forEach(c => {
+        c.style.display = (cat === 'todos' || c.dataset.cat === cat) ? 'flex' : 'none';
+      });
+    };
+  });
+
+  /* ---------- Ventana final ---------- */
+  function terminar(mensaje){
+    hechos++;
+    $('contador').textContent = 'Hoy has hecho ' + hechos + (hechos === 1 ? ' ejercicio' : ' ejercicios');
+    $('modalMsg').textContent = mensaje;
+    $('overlay').classList.add('activa');
+  }
+  function cerrarModal(){
+    $('overlay').classList.remove('activa');
+    salir();
+  }
+
+  /* ================= RESPIRACIÓN ================= */
+  const patrones = {
+    '478': { titulo:'Respiración 4-7-8', desc:'Inhala 4 · Sostén 7 · Exhala 8',
+             fases:[['Inhala',4,'in'],['Sostén',7,'hold'],['Exhala',8,'out']], ciclos:4 },
+    'caja': { titulo:'Respiración en caja', desc:'Inhala 4 · Sostén 4 · Exhala 4 · Sostén 4',
+              fases:[['Inhala',4,'in'],['Sostén',4,'hold'],['Exhala',4,'out'],['Sostén',4,'hold']], ciclos:4 }
+  };
+  let patron, activo = false, faseIdx = 0, ciclo = 0, tFase = null, tSeg = null;
+
+  function abrirRespiracion(clave){
+    detenerResp();
+    patron = patrones[clave];
+    $('respTitulo').textContent = patron.titulo;
+    $('respDesc').textContent = patron.desc;
+    mostrar('vista-resp');
+  }
+  function iniciarResp(){
+    if (activo){ detenerResp(); return; }
+    activo = true; faseIdx = 0; ciclo = 0;
+    $('btnResp').textContent = 'Detener';
+    correrFase();
+  }
+  function correrFase(){
+    const [texto, seg, tipo] = patron.fases[faseIdx];
+    const c = $('circulo');
+    if (faseIdx === 0) $('respCiclo').textContent = 'Ciclo ' + (ciclo + 1) + ' de ' + patron.ciclos;
+    c.style.transitionDuration = (tipo === 'hold' ? 0.3 : seg) + 's';
+    if (tipo === 'in')  c.style.transform = 'scale(1.5)';
+    if (tipo === 'out') c.style.transform = 'scale(0.75)';
+    $('respFase').textContent = texto;
+    let resta = seg;
+    c.textContent = resta;
+    tSeg = setInterval(() => { resta--; if (resta > 0) c.textContent = resta; }, 1000);
+    tFase = setTimeout(() => {
+      clearInterval(tSeg);
+      faseIdx++;
+      if (faseIdx >= patron.fases.length){
+        faseIdx = 0; ciclo++;
+        if (ciclo >= patron.ciclos){
+          detenerResp();
+          terminar('Completaste ' + patron.ciclos + ' ciclos de respiración.');
+          return;
+        }
+      }
+      correrFase();
+    }, seg * 1000);
+  }
+  function detenerResp(){
+    activo = false;
+    clearTimeout(tFase); clearInterval(tSeg);
+    const c = $('circulo');
+    c.style.transitionDuration = '.5s';
+    c.style.transform = 'scale(1)';
+    c.textContent = '🌬️';
+    $('respFase').textContent = 'Siéntate cómodo';
+    $('respCiclo').innerHTML = '&nbsp;';
+    $('btnResp').textContent = 'Empezar';
+  }
+
+  /* ================= 5-4-3-2-1 ================= */
+  const pasos = [
+    [5,'cosas que puedes VER','👀'],
+    [4,'cosas que puedes TOCAR','✋'],
+    [3,'cosas que puedes OÍR','👂'],
+    [2,'cosas que puedes OLER','👃'],
+    [1,'cosa que puedes SABOREAR','👅']
+  ];
+  let paso = 0;
+  function abrirCalma(){ paso = 0; pintarPaso(); mostrar('vista-calma'); }
+  function pintarPaso(){
+    const [n, t, e] = pasos[paso];
+    $('calmaEmoji').textContent = e;
+    $('calmaNum').textContent = n;
+    $('calmaTxt').textContent = t;
+    $('calmaProg').textContent = 'Paso ' + (paso + 1) + ' de 5';
+    $('btnCalma').textContent = paso === 4 ? 'Terminar' : 'Listo, siguiente';
+  }
+  function siguientePaso(){
+    if (paso < 4){ paso++; pintarPaso(); }
+    else terminar('Volviste al presente con tus sentidos.');
+  }
+
+  /* ================= SOLTAR PENSAMIENTOS ================= */
+  function abrirSoltar(){
+    $('pensamiento').value = '';
+    $('nube').className = 'nube';
+    $('nube').textContent = '';
+    mostrar('vista-soltar');
+  }
+  function soltar(){
+    const texto = $('pensamiento').value.trim();
+    if (!texto) return;
+    $('nube').textContent = texto;
+    $('nube').className = 'nube vuela';
+    $('pensamiento').value = '';
+    setTimeout(() => terminar('Soltaste ese pensamiento. Ya no tienes que cargarlo.'), 2500);
+  }
+
+  /* ================= GRATITUD ================= */
+  function abrirGratitud(){
+    ['g1','g2','g3'].forEach(id => $(id).value = '');
+    $('gratMsg').textContent = '';
+    mostrar('vista-gratitud');
+  }
+  function guardarGratitud(){
+    const alguno = ['g1','g2','g3'].some(id => $(id).value.trim() !== '');
+    if (!alguno){ $('gratMsg').textContent = 'Escribe al menos una cosa buena.'; return; }
+    terminar('Notar lo bueno también es cuidarte.');
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+/* ============ COLORES (puedes cambiarlos aquí) ============ */
+:root{
+  --morado:#7b2cbf;
+  --morado-claro:#a855f7;
+  --lila:#f3e8ff;
+  --rosa:#ffe4f1;
+  --menta:#e6f8ee;
+  --amarillo:#fff4d6;
+  --fondo:#f7f5ff;
+  --texto:#1f2a44;
+  --gris:#8a8fa3;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#e9e4fa;color:var(--texto)}
+button{font-family:inherit}
+
+/* Marco tipo celular */
+.app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--fondo);padding:16px 16px 110px}
+
+/* Vistas (pantallas internas) */
+.vista{display:none}
+.vista.activa{display:block;animation:entra .3s ease}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.volver{background:none;border:none;color:var(--morado);font-weight:600;font-size:15px;
+        text-decoration:underline;cursor:pointer;margin-bottom:12px;display:inline-block}
+
+/* ============ PANTALLA PRINCIPAL ============ */
+.hero{background:linear-gradient(135deg,#fff,#f1e4ff);border-radius:28px;padding:22px;
+      box-shadow:0 8px 24px rgba(123,44,191,.12);margin-bottom:16px}
+.hero h1{font-size:28px}
+.hero p{color:var(--gris);margin-top:4px}
+.chip{display:inline-block;margin-top:14px;background:var(--lila);color:var(--morado);
+      font-weight:600;font-size:13px;padding:6px 14px;border-radius:999px}
+
+.destacado{background:linear-gradient(135deg,var(--morado),#c77dff);color:#fff;border-radius:24px;
+           padding:20px;margin-bottom:20px;box-shadow:0 10px 24px rgba(123,44,191,.3)}
+.destacado small{opacity:.9;font-size:13px}
+.destacado h2{font-size:21px;margin:4px 0 6px}
+.destacado p{font-size:14px;opacity:.95}
+.destacado button{margin-top:14px;background:#fff;color:var(--morado);border:none;border-radius:999px;
+                  padding:11px 22px;font-weight:700;font-size:15px;cursor:pointer}
+
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;padding-bottom:4px}
+.tab{border:none;background:#fff;color:var(--morado);padding:9px 18px;border-radius:999px;
+     font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.tab.activa{background:var(--morado);color:#fff}
+
+.tarjeta{display:flex;align-items:center;gap:14px;background:#fff;border-radius:22px;padding:14px;
+         margin-bottom:12px;box-shadow:0 4px 14px rgba(31,42,68,.06);cursor:pointer;width:100%;
+         border:none;text-align:left;font-size:16px;transition:transform .15s}
+.tarjeta:active{transform:scale(.98)}
+.icono{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;flex-shrink:0}
+.icono svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ic-lila{background:var(--lila);color:var(--morado)}
+.ic-rosa{background:var(--rosa);color:#d6336c}
+.ic-menta{background:var(--menta);color:#1f9d55}
+.ic-amarillo{background:var(--amarillo);color:#d99a00}
+.texto{flex:1}
+.texto b{display:block;font-size:16px;color:var(--texto)}
+.texto span{font-size:13px;color:var(--gris)}
+.tiempo{font-size:12px;font-weight:600;color:var(--morado);background:var(--lila);padding:5px 10px;border-radius:999px;white-space:nowrap}
+
+/* ============ PANTALLAS DE RETOS ============ */
+.panel{background:#fff;border-radius:28px;padding:24px 20px;text-align:center;box-shadow:0 8px 24px rgba(31,42,68,.07)}
+.panel h2{font-size:22px;margin-bottom:6px}
+.panel .desc{color:var(--gris);font-size:14px;margin-bottom:10px}
+
+.btn{background:var(--morado);color:#fff;border:none;border-radius:999px;padding:14px 30px;
+     font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(123,44,191,.3);margin:10px 4px 0}
+.btn.sec{background:var(--lila);color:var(--morado);box-shadow:none}
+
+.marcador{display:flex;justify-content:space-around;font-weight:700;color:var(--morado);margin:8px 0}
+
+/* Cielo (burbujas, estrellas y enojo) */
+.cielo{position:relative;height:340px;border-radius:24px;overflow:hidden;margin:10px 0;touch-action:manipulation}
+.cielo.c-burbujas{background:linear-gradient(#f3e8ff,#ffe4f1)}
+.cielo.c-estrellas{background:linear-gradient(#2b1055,#7b2cbf)}
+.cielo.c-enojo{background:linear-gradient(#fff1e6,#ffe4f1)}
+
+.item{position:absolute;cursor:pointer}
+.item i{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;
+        font-style:normal;line-height:1;user-select:none}
+.item.sube{bottom:-100px;animation:subir linear forwards}
+.item.cae{top:-80px;animation:caer linear forwards}
+.item.aparece{animation:aparece 2.4s ease forwards}
+.item.pop{pointer-events:none}
+.item.pop i{animation:pop .25s forwards}
+
+.burbujas i{background:radial-gradient(circle at 30% 30%,#fff,rgba(199,125,255,.55));
+            border:2px solid rgba(255,255,255,.9)}
+.estrellas i{filter:drop-shadow(0 0 8px rgba(255,230,120,.9))}
+.enojo i{background:radial-gradient(circle at 30% 30%,#b9bfd3,#6b7390)}
+
+@keyframes subir{to{transform:translateY(-470px)}}
+@keyframes caer{to{transform:translateY(470px)}}
+@keyframes aparece{
+  0%{opacity:0;transform:scale(.5)}
+  15%{opacity:1;transform:scale(1)}
+  85%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(.8)}
+}
+@keyframes pop{to{transform:scale(1.6);opacity:0}}
+
+.confeti{position:absolute;width:8px;height:8px;border-radius:2px;pointer-events:none;
+         animation:confeti .7s ease-out forwards}
+@keyframes confeti{to{transform:translate(var(--dx),var(--dy)) rotate(260deg);opacity:0}}
+
+/* Arena zen */
+.arena{display:block;width:100%;height:320px;border-radius:24px;margin:10px 0;
+       background:linear-gradient(#f6e7c8,#ecd3a3);touch-action:none;cursor:crosshair}
+
+/* Galleta de la fortuna */
+.galleta{font-size:100px;background:none;border:none;cursor:pointer;display:block;margin:8px auto;line-height:1.1}
+.galleta.abre{animation:agita .6s}
+@keyframes agita{
+  0%,100%{transform:rotate(0)}
+  20%{transform:rotate(-14deg) scale(1.1)}
+  40%{transform:rotate(12deg) scale(1.1)}
+  60%{transform:rotate(-8deg)}
+  80%{transform:rotate(6deg)}
+}
+.papel{background:var(--amarillo);border-radius:16px;padding:16px;font-weight:600;min-height:80px;
+       display:grid;place-items:center;margin:12px 0;opacity:0;transform:translateY(8px);transition:.4s}
+.papel.ver{opacity:1;transform:none}
+
+/* Memoria */
+.tablero{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.carta{aspect-ratio:1;border-radius:16px;border:none;font-size:0;cursor:pointer;
+       background:linear-gradient(135deg,var(--morado-claro),#d8b4fe)}
+.carta.abierta,.carta.ok{font-size:30px;background:#fff;box-shadow:inset 0 0 0 2px var(--lila)}
+.carta.ok{background:var(--menta)}
+
+/* Ventana final */
+.overlay{position:fixed;inset:0;background:rgba(31,42,68,.55);display:none;place-items:center;z-index:50;padding:20px}
+.overlay.activa{display:grid}
+.modal{background:#fff;border-radius:28px;padding:28px 22px;max-width:360px;width:100%;text-align:center}
+.modal h3{font-size:22px;margin-bottom:6px}
+.modal p{color:var(--gris);margin-bottom:16px}
+.caritas{display:flex;justify-content:center;gap:12px;margin-top:10px}
+.caritas button{font-size:32px;background:var(--lila);border:none;border-radius:50%;width:56px;height:56px;cursor:pointer}
+
+/* Menú inferior */
+.menu{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;
+      display:flex;justify-content:space-around;align-items:center;padding:12px 0 16px;
+      box-shadow:0 -4px 20px rgba(0,0,0,.06);z-index:10}
+.menu a{color:var(--gris);display:grid;place-items:center}
+.menu a.activo{color:var(--morado)}
+.menu svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.menu .mas svg{width:42px;height:42px;color:var(--morado)}
+
+@media (prefers-reduced-motion:reduce){
+  .vista.activa{animation:none}
+}

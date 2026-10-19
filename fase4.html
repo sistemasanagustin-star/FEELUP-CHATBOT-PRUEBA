@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FeelUp - Retos</title>
+<link rel="stylesheet" href="estilos4.css">
+</head>
+
+<body>
+<div class="app">
+
+  <!-- ====================== PANTALLA PRINCIPAL ====================== -->
+  <section class="vista activa" id="vista-inicio">
+    <a class="volver" href="opciones.html">‹ Volver</a>
+
+    <div class="hero">
+      <h1>Retos 🎯</h1>
+      <p>Pequeños pasos para sentirte mejor. Elige según cómo te sientes.</p>
+      <span class="chip" id="contador">Hoy has completado 0 retos</span>
+    </div>
+
+    <div class="destacado">
+      <small>Para empezar</small>
+      <h2>Burbujas antiestrés</h2>
+      <p>Revienta burbujas durante 30 segundos y baja el estrés.</p>
+      <button onclick="abrirLluvia('burbujas')">Empezar ahora</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab activa" data-cat="todos">Todos</button>
+      <button class="tab" data-cat="calma">Calma</button>
+      <button class="tab" data-cat="animo">Ánimo</button>
+      <button class="tab" data-cat="descarga">Descarga</button>
+      <button class="tab" data-cat="curiosidad">Curiosidad</button>
+    </div>
+
+    <!-- CALMA -->
+    <button class="tarjeta" data-cat="calma" onclick="abrirLluvia('burbujas')">
+      <span class="icono ic-lila"><svg viewBox="0 0 24 24"><circle cx="9" cy="14" r="5"/><circle cx="17" cy="7" r="3"/></svg></span>
+      <span class="texto"><b>Burbujas antiestrés</b><span>Para cuando estás ansioso</span></span>
+      <span class="tiempo">30 s</span>
+    </button>
+
+    <button class="tarjeta" data-cat="calma" onclick="abrirArena()">
+      <span class="icono ic-amarillo"><svg viewBox="0 0 24 24"><path d="M3 9c3-3 6 3 9 0s6 3 9 0"/><path d="M3 15c3-3 6 3 9 0s6 3 9 0"/></svg></span>
+      <span class="texto"><b>Arena zen</b><span>Dibuja líneas y respira</span></span>
+      <span class="tiempo">2 min</span>
+    </button>
+
+    <!-- ÁNIMO -->
+    <button class="tarjeta" data-cat="animo" onclick="abrirLluvia('estrellas')">
+      <span class="icono ic-amarillo"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></span>
+      <span class="texto"><b>Atrapa las estrellas</b><span>Para cuando estás triste</span></span>
+      <span class="tiempo">30 s</span>
+    </button>
+
+    <button class="tarjeta" data-cat="animo" onclick="abrirGalleta()">
+      <span class="icono ic-rosa"><svg viewBox="0 0 24 24"><path d="M4 14a8 6 0 0 1 16 0c0 2-3 4-8 4s-8-2-8-4z"/><path d="M8 14c1-2 7-2 8 0"/></svg></span>
+      <span class="texto"><b>Galleta de la fortuna</b><span>Un mensaje bonito para ti</span></span>
+      <span class="tiempo">1 min</span>
+    </button>
+
+    <!-- DESCARGA -->
+    <button class="tarjeta" data-cat="descarga" onclick="abrirLluvia('enojo')">
+      <span class="icono ic-rosa"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 9l3 1.5M16 9l-3 1.5M8.5 16c2-2 5-2 7 0"/></svg></span>
+      <span class="texto"><b>Aplasta el enojo</b><span>Para cuando sientes rabia</span></span>
+      <span class="tiempo">30 s</span>
+    </button>
+
+    <!-- CURIOSIDAD -->
+    <button class="tarjeta" data-cat="curiosidad" onclick="abrirMemoria()">
+      <span class="icono ic-menta"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="10" height="14" rx="2"/><rect x="11" y="4" width="10" height="14" rx="2"/></svg></span>
+      <span class="texto"><b>Memoria de emociones</b><span>Encuentra las parejas</span></span>
+      <span class="tiempo">2 min</span>
+    </button>
+  </section>
+
+  <!-- ====================== BURBUJAS / ESTRELLAS / ENOJO ====================== -->
+  <section class="vista" id="vista-lluvia">
+    <button class="volver" onclick="salir()">‹ Volver</button>
+    <div class="panel">
+      <h2 id="lluviaTitulo"></h2>
+      <p class="desc" id="lluviaDesc"></p>
+      <div class="marcador">
+        <span><span id="lluviaEtiqueta"></span>: <b id="puntos">0</b></span>
+        <span>Tiempo: <b id="tiempoL">30</b> s</span>
+      </div>
+      <div class="cielo" id="cielo"></div>
+      <button class="btn" id="btnLluvia" onclick="jugarLluvia()">Empezar</button>
+    </div>
+  </section>
+
+  <!-- ====================== ARENA ZEN ====================== -->
+  <section class="vista" id="vista-arena">
+    <button class="volver" onclick="salir()">‹ Volver</button>
+    <div class="panel">
+      <h2>Arena zen 🪷</h2>
+      <p class="desc">Arrastra el dedo para dibujar en la arena. Sin reglas, sin puntos.</p>
+      <canvas class="arena" id="arena"></canvas>
+      <button class="btn sec" onclick="limpiarArena()">Rastrillar</button>
+      <button class="btn" onclick="terminar('Tomaste un momento solo para ti.')">Listo</button>
+    </div>
+  </section>
+
+  <!-- ====================== GALLETA ====================== -->
+  <section class="vista" id="vista-galleta">
+    <button class="volver" onclick="salir()">‹ Volver</button>
+    <div class="panel">
+      <h2>Galleta de la fortuna 🥠</h2>
+      <p class="desc" id="galletaDesc">Toca la galleta para abrirla.</p>
+      <button class="galleta" id="galleta" onclick="romperGalleta()">🥠</button>
+      <div class="papel" id="papel"></div>
+      <div id="accionesG" style="display:none">
+        <button class="btn sec" onclick="romperGalleta()">Otra frase</button>
+        <button class="btn" onclick="terminar('Guarda esa frase para cuando la necesites.')">Listo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== MEMORIA ====================== -->
+  <section class="vista" id="vista-memoria">
+    <button class="volver" onclick="salir()">‹ Volver</button>
+    <div class="panel">
+      <h2>Memoria de emociones 🧠</h2>
+      <p class="desc">Encuentra las parejas. Intentos: <b id="movs">0</b></p>
+      <div class="tablero" id="tablero"></div>
+      <button class="btn sec" onclick="abrirMemoria()">Mezclar de nuevo</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Ventana al terminar -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3>¡Bien hecho! 💜</h3>
+    <p id="modalMsg"></p>
+    <b>¿Cómo te sientes ahora?</b>
+    <div class="caritas">
+      <button onclick="cerrarModal()">😄</button>
+      <button onclick="cerrarModal()">🙂</button>
+      <button onclick="cerrarModal()">😐</button>
+      <button onclick="cerrarModal()">😔</button>
+    </div>
+  </div>
+</div>
+
+<!-- Menú inferior -->
+<nav class="menu">
+  <a class="activo" href="index.html"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+  <a href="#"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg></a>
+  <a class="mas" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></a>
+  <a href="#"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></a>
+  <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
+</nav>
+
+<script>
+  const $ = id => document.getElementById(id);
+  let jugados = 0;
+
+  /* ---------- Navegación entre pantallas ---------- */
+  function mostrar(id){
+    document.querySelectorAll('.vista').forEach(v => v.classList.remove('activa'));
+    $(id).classList.add('activa');
+    window.scrollTo(0,0);
+  }
+  function salir(){
+    detenerLluvia();
+    mostrar('vista-inicio');
+  }
+
+  /* ---------- Filtros por emoción ---------- */
+  document.querySelectorAll('.tab').forEach(t => {
+    t.onclick = () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('activa'));
+      t.classList.add('activa');
+      const cat = t.dataset.cat;
+      document.querySelectorAll('.tarjeta').forEach(c => {
+        c.style.display = (cat === 'todos' || c.dataset.cat === cat) ? 'flex' : 'none';
+      });
+    };
+  });
+
+  /* ---------- Ventana final ---------- */
+  function terminar(mensaje){
+    jugados++;
+    $('contador').textContent = 'Hoy has completado ' + jugados + (jugados === 1 ? ' reto' : ' retos');
+    $('modalMsg').textContent = mensaje;
+    $('overlay').classList.add('activa');
+  }
+  function cerrarModal(){
+    $('overlay').classList.remove('activa');
+    salir();
+  }
+
+  /* ============ BURBUJAS, ESTRELLAS Y ENOJO (mismo motor) ============ */
+  const modos = {
+    burbujas: { titulo:'Burbujas antiestrés 🫧', desc:'Toca las burbujas para reventarlas. Respira mientras juegas.',
+                cielo:'c-burbujas', mov:'sube', cada:550, etiqueta:'Burbujas',
+                msg:n => 'Reventaste ' + n + ' burbujas. ¡Qué relajante!' },
+    estrellas:{ titulo:'Atrapa las estrellas ⭐', desc:'Toca las estrellas antes de que caigan.',
+                cielo:'c-estrellas', mov:'cae', cada:650, etiqueta:'Estrellas',
+                msg:n => 'Atrapaste ' + n + ' estrellas. ¡Tú también brillas!' },
+    enojo:    { titulo:'Aplasta el enojo 😠', desc:'Toca las caritas enojadas antes de que desaparezcan y conviértelas en confeti.',
+                cielo:'c-enojo', mov:'aparece', cada:500, etiqueta:'Aplastados',
+                msg:n => 'Aplastaste ' + n + ' enojos. Ya pesa menos.' }
+  };
+  let clave, modo, lInt = null, lTiempo = null, puntos = 0, resta = 30;
+
+  function abrirLluvia(k){
+    detenerLluvia();
+    clave = k; modo = modos[k];
+    puntos = 0; resta = 30;
+    $('lluviaTitulo').textContent = modo.titulo;
+    $('lluviaDesc').textContent = modo.desc;
+    $('lluviaEtiqueta').textContent = modo.etiqueta;
+    $('puntos').textContent = 0;
+    $('tiempoL').textContent = 30;
+    $('cielo').className = 'cielo ' + modo.cielo;
+    $('cielo').innerHTML = '';
+    $('btnLluvia').textContent = 'Empezar';
+    mostrar('vista-lluvia');
+  }
+  function jugarLluvia(){
+    if (lInt) return;
+    $('btnLluvia').textContent = '¡Ahora!';
+    lInt = setInterval(crearItem, modo.cada);
+    lTiempo = setInterval(() => {
+      resta--;
+      $('tiempoL').textContent = resta;
+      if (resta <= 0){
+        const p = puntos, m = modo;
+        detenerLluvia();
+        terminar(m.msg(p));
+      }
+    }, 1000);
+  }
+  function crearItem(){
+    const cielo = $('cielo');
+    let tam;
+    if (clave === 'burbujas') tam = 45 + Math.random() * 45;
+    if (clave === 'estrellas') tam = 36 + Math.random() * 22;
+    if (clave === 'enojo') tam = 60 + Math.random() * 20;
+
+    const d = document.createElement('div');
+    d.className = 'item ' + modo.mov + ' ' + clave;
+    d.style.width = d.style.height = tam + 'px';
+    d.style.left = Math.random() * (cielo.clientWidth - tam) + 'px';
+
+    if (modo.mov === 'aparece') d.style.top = Math.random() * (cielo.clientHeight - tam) + 'px';
+    if (clave === 'burbujas') d.style.animationDuration = (5 + Math.random() * 3) + 's';
+    if (clave === 'estrellas') d.style.animationDuration = (3.5 + Math.random() * 2) + 's';
+
+    const i = document.createElement('i');
+    if (clave === 'estrellas'){ i.textContent = '⭐'; i.style.fontSize = tam * 0.9 + 'px'; }
+    if (clave === 'enojo'){ i.textContent = '😠'; i.style.fontSize = tam * 0.55 + 'px'; }
+    d.appendChild(i);
+
+    d.addEventListener('pointerdown', () => {
+      if (d.classList.contains('pop')) return;
+      d.classList.add('pop');
+      puntos++;
+      $('puntos').textContent = puntos;
+      if (clave === 'enojo') confeti(d.offsetLeft + tam / 2, d.offsetTop + tam / 2);
+      setTimeout(() => d.remove(), 250);
+    });
+    d.addEventListener('animationend', e => { if (e.target === d) d.remove(); });
+    cielo.appendChild(d);
+  }
+  function confeti(x, y){
+    const colores = ['#a855f7','#ff6fa8','#ffd166','#5ad19a','#6ec1ff'];
+    for (let n = 0; n < 9; n++){
+      const c = document.createElement('span');
+      c.className = 'confeti';
+      c.style.left = x + 'px';
+      c.style.top = y + 'px';
+      c.style.background = colores[n % colores.length];
+      c.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
+      c.style.setProperty('--dy', (Math.random() * 120 - 60) + 'px');
+      $('cielo').appendChild(c);
+      setTimeout(() => c.remove(), 700);
+    }
+  }
+  function detenerLluvia(){
+    clearInterval(lInt); clearInterval(lTiempo);
+    lInt = null; lTiempo = null;
+  }
+
+  /* ================= ARENA ZEN ================= */
+  let ctx = null, dibujando = false, ultimo = null;
+  function abrirArena(){
+    mostrar('vista-arena');
+    const c = $('arena');
+    c.width = c.clientWidth;
+    c.height = c.clientHeight;
+    ctx = c.getContext('2d');
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    limpiarArena();
+  }
+  function limpiarArena(){
+    if (ctx) ctx.clearRect(0, 0, $('arena').width, $('arena').height);
+  }
+  function posicion(e){
+    const r = $('arena').getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+  const lienzo = $('arena');
+  lienzo.addEventListener('pointerdown', e => {
+    dibujando = true;
+    ultimo = posicion(e);
+    lienzo.setPointerCapture(e.pointerId);
+  });
+  lienzo.addEventListener('pointermove', e => {
+    if (!dibujando || !ctx) return;
+    const p = posicion(e);
+    // surco oscuro y luz encima, para que parezca arena
+    ctx.beginPath(); ctx.moveTo(ultimo.x, ultimo.y); ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = 'rgba(140,100,40,.35)'; ctx.lineWidth = 12; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ultimo.x, ultimo.y); ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = 'rgba(255,250,235,.65)'; ctx.lineWidth = 3; ctx.stroke();
+    ultimo = p;
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(ev =>
+    lienzo.addEventListener(ev, () => { dibujando = false; })
+  );
+
+  /* ================= GALLETA DE LA FORTUNA ================= */
+  const frases = [
+    'Hoy no tienes que poder con todo. Con un paso pequeño basta.',
+    'Lo que sientes es válido, y también va a pasar.',
+    'Eres más fuerte de lo que crees.',
+    'Pedir ayuda no es debilidad, es valentía.',
+    'Descansar también es avanzar.',
+    'Cada respiración es un nuevo comienzo.',
+    'Eres suficiente tal como eres.',
+    'Un mal día no es una mala vida.',
+    'Hablar de lo que sientes te hace más ligero.',
+    'Sé amable contigo, como lo serías con un amigo.',
+    'Tus emociones no te definen, te acompañan.',
+    'Los pasos pequeños también llegan lejos.'
+  ];
+  let ultimaFrase = -1;
+  function abrirGalleta(){
+    ultimaFrase = -1;
+    $('papel').className = 'papel';
+    $('papel').textContent = '';
+    $('accionesG').style.display = 'none';
+    $('galletaDesc').textContent = 'Toca la galleta para abrirla.';
+    mostrar('vista-galleta');
+  }
+  function romperGalleta(){
+    const g = $('galleta');
+    g.classList.remove('abre');
+    void g.offsetWidth;            // reinicia la animación
+    g.classList.add('abre');
+    let n;
+    do { n = Math.floor(Math.random() * frases.length); } while (n === ultimaFrase);
+    ultimaFrase = n;
+    $('papel').classList.remove('ver');
+    setTimeout(() => {
+      $('papel').textContent = frases[n];
+      $('papel').classList.add('ver');
+      $('accionesG').style.display = 'block';
+      $('galletaDesc').textContent = 'Esto es para ti:';
+    }, 450);
+  }
+
+  /* ================= MEMORIA DE EMOCIONES ================= */
+  const emojis = ['😊','😢','😡','😴','😮','🥰'];
+  let abiertas = [], bloqueo = false, pares = 0, movs = 0;
+  function abrirMemoria(){
+    const mezcla = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+    $('tablero').innerHTML = '';
+    pares = 0; movs = 0; abiertas = []; bloqueo = false;
+    $('movs').textContent = 0;
+    mezcla.forEach(e => {
+      const b = document.createElement('button');
+      b.className = 'carta';
+      b.dataset.e = e;
+      b.textContent = e;
+      b.onclick = () => voltear(b);
+      $('tablero').appendChild(b);
+    });
+    mostrar('vista-memoria');
+  }
+  function voltear(b){
+    if (bloqueo || b.classList.contains('abierta') || b.classList.contains('ok')) return;
+    b.classList.add('abierta');
+    abiertas.push(b);
+    if (abiertas.length === 2){
+      movs++;
+      $('movs').textContent = movs;
+      const [a, c] = abiertas;
+      if (a.dataset.e === c.dataset.e){
+        a.classList.replace('abierta','ok');
+        c.classList.replace('abierta','ok');
+        abiertas = [];
+        pares++;
+        if (pares === emojis.length)
+          setTimeout(() => terminar('Encontraste todas las parejas en ' + movs + ' intentos.'), 600);
+      } else {
+        bloqueo = true;
+        setTimeout(() => {
+          a.classList.remove('abierta');
+          c.classList.remove('abierta');
+          abiertas = []; bloqueo = false;
+        }, 800);
+      }
+    }
+  }
+</script>
+</body>
+</html>

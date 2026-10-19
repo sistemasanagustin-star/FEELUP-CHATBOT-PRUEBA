@@ -1,0 +1,222 @@
+/* Pantalla 1: Bienvenida + Estado de ánimo (fase2.html) */
+
+/* ===== Variables de color (cámbialas aquí y se actualiza todo) ===== */
+:root {
+  --morado: #9b51e0;
+  --morado-claro: #f3e8ff;
+  --fondo: #f4f2f9;
+  --pantalla: #faf8ff;
+  --blanco: #ffffff;
+  --texto: #2c3e50;
+  --texto-suave: #7f8c8d;
+  --sombra: 0 4px 16px rgba(120, 90, 200, 0.10);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--fondo);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ===== Íconos (SVG incluidos, no necesitan internet) ===== */
+.ico {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ===== Pantalla móvil ===== */
+.mobile-container {
+  width: 100%;
+  max-width: 380px;
+  height: 780px;
+  background-color: var(--pantalla);
+  border-radius: 32px;
+  box-shadow: 0 12px 30px rgba(80, 60, 140, 0.15);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 8px solid var(--blanco);
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  padding-bottom: 90px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.content::-webkit-scrollbar { display: none; }
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--texto);
+  margin: 4px 0 12px;
+}
+
+/* ===== Viñeta 1: Bienvenida ===== */
+.welcome-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);
+  border-radius: 22px;
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: var(--sombra);
+}
+
+.welcome-card h1 {
+  font-size: 26px;
+  color: var(--texto);
+}
+
+.welcome-card p {
+  font-size: 14px;
+  color: var(--texto-suave);
+  margin-top: 4px;
+}
+
+/* ===== Viñeta 2: Estado de ánimo ===== */
+.mood-card {
+  background: var(--blanco);
+  border-radius: 22px;
+  padding: 14px 10px;
+  margin-bottom: 24px;
+  box-shadow: var(--sombra);
+}
+
+.mood-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.mood-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 2px;
+  background: transparent;
+  border-radius: 14px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mood-btn svg {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+  transition: transform 0.2s ease;
+}
+
+.mood-btn span {
+  font-size: 10px;
+  color: var(--texto-suave);
+}
+
+.mood-btn:hover {
+  background-color: var(--morado-claro);
+}
+
+.mood-btn:hover svg {
+  transform: scale(1.15);
+}
+
+/* Botón elegido (se activa con el mini script del HTML) */
+.mood-btn.selected {
+  border-color: var(--morado);
+  background-color: var(--morado-claro);
+}
+
+.mood-btn.selected span {
+  color: var(--morado);
+  font-weight: 600;
+}
+
+/* ===== Frase del día ===== */
+.frase-card {
+  background: linear-gradient(135deg, #ebf3fe 0%, #f3e8ff 100%);
+  padding: 18px;
+  border-radius: 18px;
+  position: relative;
+  box-shadow: var(--sombra);
+}
+
+.frase-card p {
+  font-size: 13px;
+  color: #34495e;
+  font-style: italic;
+  line-height: 1.5;
+  padding-right: 24px;
+}
+
+.frase-card svg {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  width: 18px;
+  height: 18px;
+  color: var(--morado);
+  fill: var(--morado);
+}
+
+/* ===== Barra de navegación inferior ===== */
+.nav-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 64px;
+  background: var(--blanco);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #f0edf7;
+  box-shadow: 0 -4px 14px rgba(120, 90, 200, 0.06);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #bdc3c7;
+  text-decoration: none;
+  font-size: 10px;
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover { color: var(--morado); }
+
+.nav-item svg {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 2px;
+}
+
+.nav-item.active { color: var(--morado); }
+
+.nav-item svg.icon-add {
+  width: 34px;
+  height: 34px;
+  color: var(--morado);
+}
+
+/* ===== Colores de íconos: estado de ánimo ===== */
+.icon-genial  { color: #4CAF50; }
+.icon-bien    { color: #8BC34A; }
+.icon-regular { color: #FFC107; }
+.icon-mal     { color: #FF9800; }
+.icon-muy-mal { color: #F44336; }

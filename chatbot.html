@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Chatbot · FeelUp</title>
+
+  <!-- Tipografía: Nunito (redondeada y fácil de leer) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+
+  <main class="app">
+
+    <!-- PARTE SUPERIOR: flecha, título y avatar de Lumi -->
+    <header class="encabezado">
+      <!-- Cambia "fase3.html" por la pantalla a la que quieres volver -->
+      <a class="btn-volver" href="fase3.html" aria-label="Volver">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+      <h1>Chatbot</h1>
+      <img class="avatar-encabezado" src="lumi.svg" alt="Lumi">
+    </header>
+
+    <!-- CUERPO: aquí JavaScript va agregando los mensajes -->
+    <section id="chat" class="chat" role="log" aria-live="polite" aria-label="Conversación con Lumi"></section>
+
+    <!-- PARTE INFERIOR: campo para escribir y botón de enviar -->
+    <div class="zona-escribir">
+      <form id="form-chat" class="form-chat" autocomplete="off">
+        <input id="mensaje" type="text" placeholder="Escribe aquí..." maxlength="1000"
+               aria-label="Escribe tu mensaje">
+        <button id="btn-enviar" type="submit" aria-label="Enviar mensaje">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+      <p class="aviso">Lumi es una IA y no reemplaza la ayuda de un profesional.</p>
+    </div>
+
+    <!-- MENÚ INFERIOR
+         Esto es un ejemplo. Reemplázalo por el menú que ya tienes en tus otras pantallas
+         (y pon la clase "activo" en el botón Chatbot). -->
+    <nav class="menu-inferior" aria-label="Menú principal">
+      <a href="index.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path>
+        </svg>
+        Inicio
+      </a>
+      <a href="fase3.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        Ejercicios
+      </a>
+      <a href="chatbot.html" class="activo" aria-current="page">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path>
+        </svg>
+        Chatbot
+      </a>
+    </nav>
+
+  </main>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "feelup",
+  "version": "1.0.0",
+  "description": "FeelUp: app de bienestar emocional con Lumi, un chatbot con IA",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0"
+  }
+}
